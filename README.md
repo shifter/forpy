@@ -10,3 +10,14 @@ Generic network traffic forwarding and manipulation tool implemented with [async
 ```
 pip install uvloop
 ```
+
+## Manipulate Traffic
+forpy implements two functions for traffic manipulations: `request_hook()` for manipulating requests before they will be sent to the target server and `response_hook()` for manipulating responses before they will be sent back to the client.
+
+If e.g. a rquest would contain a string `username=anonymous`, changing the username would be as easy as:
+
+```python
+def request_hook(data):
+    data = data.replace(b'username=anonymous', b'username=admin')
+    return data
+```
