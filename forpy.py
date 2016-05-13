@@ -11,14 +11,15 @@ if sys.version_info.major < 3 or \
     print('At least Python version 3.3 is required to run this script!')
     sys.exit(1)
 
-# Python 3.4 ships with asyncio in the standard libraries. Users with Python 3.3
-# need to install it, e.g.: pip install asyncio
 try:
+    # Python 3.4 ships with asyncio in the standard libraries. Users with Python 3.3
+    # need to install it, e.g.: pip install asyncio
     import asyncio
 except ImportError:
     print('Please install asyncio!')
     sys.exit(1)
 try:
+    # If available, use uvloop for better performance
     import uvloop
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 except ImportError:
@@ -26,8 +27,7 @@ except ImportError:
 
 LOGGER = logging.getLogger(__name__)
 
-ARGS = argparse.ArgumentParser(description="Traffic forwarder")
-
+ARGS = argparse.ArgumentParser(description="Generic traffic forwarder")
 ARGS.add_argument(
     '-H', '--host', default='127.0.0.1',
     help='Host to listen [default: %(default)s]')
